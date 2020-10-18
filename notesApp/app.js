@@ -1,13 +1,8 @@
-//Importing a built-in module
-
-// const fs = require("fs");
-
-// fs.writeFileSync("notes.txt", "My name is Charu");
-// fs.appendFileSync("notes.txt", "I am in Chitkara University");
-
-//Importing a js file
-const add = require("./sample.js");
-console.log(add(7, 8));
-
+const validator = require("validator");
 const getNotes = require("./notes.js");
 console.log(getNotes());
+console.log(validator.isEmail("gmail.com"));
+console.log(validator.isURL("https:charu.com"));
+
+const chalk = require("chalk");
+console.log(chalk.green.bgRed.bold.italic.visible("Success"));
