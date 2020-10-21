@@ -3,6 +3,7 @@ const chalk = require("chalk");
 
 const addNotes = (title, body) => {
   const notes = loadNotes();
+  debugger;
   const duplicate = notes.find((note) => note.title === title);
   if (!duplicate) {
     notes.push({ title: title, body: body });
