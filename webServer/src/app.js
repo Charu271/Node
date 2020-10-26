@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
+const geoCode = require("./utils/geocode");
+const forecast = require("./utils/forecast");
 const app = express();
 console.log(__dirname);
 console.log(__filename);
@@ -13,7 +15,7 @@ app.set("views", viewDirectory);
 hbs.registerPartials(partialPath);
 app.get("", (req, res) => {
   res.render("index", {
-    title: "Index",
+    title: "Weather",
     name: "Charu",
   });
 });
@@ -30,6 +32,42 @@ app.get("/help", (req, res) => {
     message: "Please help the community",
   });
 });
+app.get("/weather", (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      error: "Address required",
+    });
+  }
+  geoCode(
+    req.query.address,
+    (error, { latitude, longitude, location } = {}) => {
+      if (error) {
+        return res.send({ error: error });
+      }
+      forecast(latitude, longitude, (error, forecastdata) => {
+        if (error) {
+          return res.send({ error: error });
+        }
+        res.send({
+          location: location,
+          forecast: forecastdata,
+          address: req.query.address,
+        });
+        // console.log(location);
+        // console.log(forecastdata);
+      });
+    }
+  );
+});
+app.get("/products", (req, res) => {
+  if (!req.query.search) {
+    return res.send("Search query is required");
+  }
+  console.log(req.query.search);
+  res.send({
+    products: [],
+  });
+});
 app.get("/help/*", (req, res) => {
   res.render("404", {
     error: "Help article not found",
@@ -43,12 +81,7 @@ app.get("*", (req, res) => {
   });
 });
 console.log(publicDirectoryPath);
-app.get("/weather", (req, res) => {
-  res.send({
-    location: "Bassi",
-    forecast: "Sunny ",
-  });
-});
+
 app.listen(3001, () => {
   console.log("Server started on port 3001");
 });

@@ -10,7 +10,7 @@ const forecast = (longitude, latitude, callback) => {
     if (error) {
       callback("Unable to connect to the locaation requested!", undefined);
     } else if (body.error) {
-      console.log("Unable to find the loction.Try another search", undefined);
+      callback("Unable to find the loction.Try another search", undefined);
     } else {
       const obj = body.current;
       callback(
