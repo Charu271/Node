@@ -4,6 +4,7 @@ const hbs = require("hbs");
 const geoCode = require("./utils/geocode");
 const forecast = require("./utils/forecast");
 const app = express();
+const port = process.env.PORT || 3000;
 console.log(__dirname);
 console.log(__filename);
 const publicDirectoryPath = path.join(__dirname, "../public");
@@ -59,15 +60,15 @@ app.get("/weather", (req, res) => {
     }
   );
 });
-app.get("/products", (req, res) => {
-  if (!req.query.search) {
-    return res.send("Search query is required");
-  }
-  console.log(req.query.search);
-  res.send({
-    products: [],
-  });
-});
+// app.get("/products", (req, res) => {
+//   if (!req.query.search) {
+//     return res.send("Search query is required");
+//   }
+//   console.log(req.query.search);
+//   res.send({
+//     products: [],
+//   });
+// });
 app.get("/help/*", (req, res) => {
   res.render("404", {
     error: "Help article not found",
@@ -82,6 +83,6 @@ app.get("*", (req, res) => {
 });
 console.log(publicDirectoryPath);
 
-app.listen(3001, () => {
-  console.log("Server started on port 3001");
+app.listen(port, () => {
+  console.log("Server started on port " + port);
 });

@@ -15,7 +15,7 @@ const forecast = (longitude, latitude, callback) => {
       const obj = body.current;
       callback(
         undefined,
-        `${obj.weather_descriptions[0]} The current temprature is ${obj.temperature} and feel like temperature is ${obj.feelslike}`
+        `${obj.weather_descriptions[0]}. The current temprature is ${obj.temperature} and feel like temperature is ${obj.feelslike}. The humidity is ${obj.humidity}%. There are ${obj.precip}% chances of precipitation.`
       );
     }
   });

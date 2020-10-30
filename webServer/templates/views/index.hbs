@@ -3,12 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Weather</title>
+    <link rel="icon" href="/img/weather.png">
     <link rel="stylesheet" href="css/style.css" />
-    <script src="js/scripts.js"></script>
+   
   </head>
   <body>
+  <div class="main-content">
     {{>header}}
+    
+    You can search weather on this page<br><br>
+    <form>
+      <input placeholder="Location">
+      <button>Search</button>
+      <p id="msg-1"></p>
+      <p id="msg-2"></p>
+    </form>
+    
+    </div>
     {{>footer}}
+     <script src="js/scripts.js"></script>
   </body>
 </html>
